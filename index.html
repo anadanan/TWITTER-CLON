@@ -13,21 +13,362 @@
     body{
       text-align: center;
     }
+    body, html {
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
+* {
+    box-sizing: border-box;
+}
+.am-img {
+    /* The image used */
+    background-image: url("public/amanecer.jpg");
+
+    min-height: 380px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-img {
+    /* The image used */
+    background-image: url("public/sol.jpg");
+
+    min-height: 380px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Add styles to the form container */
+.container {
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    max-width: 300px;
+    padding: 16px;
+    background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.btn:hover {
+    opacity: 1;
+}
+img#avatar {
+  vertical-align: middle;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+}
+
+ul {
+    margin:0px;
+    padding:0px;
+    list-style:none;
+}
+
+li {
+    clear:both;
+    overflow:hidden;
+    margin-bottom:20px;
+    width:100%;
+}
+
+.user {
+    float:left;
+    width:100px;
+    margin:0;
+}
+
+.user figcaption {
+    text-align:center;
+}
+
+.description {
+    position:relative;
+    /*
+    Esta separación a la izquierda, es el ancho de la imagen del usuario mas
+    el espacio que utilizaremos para la fecha con css
+    */
+    margin:0 0 0 130px;
+    padding:10px;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    min-height:30px;
+    background-color:#ccc;
+}
+
+/*
+Aqui definimos la clase arrowLeft, que contendra la flecha en la
+izquierda.
+De esta manera, podemos crear la clase arrowDerecha, arrowTop y arrowLeft
+para utilizar donde nos convenga
+*/
+.arrowLeft::after {
+    position:absolute;
+    left:-20px;
+    top:15px;
+    content:"\00a0";
+    display:block;
+    width:0px;
+    height:0px;
+    border-width:10px 20px 10px 0px;
+    border-style:solid;
+    border-color:transparent #ccc transparent transparent;
+}
+
+.description p {
+    padding:0px;
+    margin:0px;
+}
+.rojo{
+  background-color: red;
+}
 
     </style>
   </head>
+
   <body>
+    <div id="login"><!-- style="display:none"-->
+        <h1>Login TwitterClonAna</h1>
+        <div id="loginSesion" class="am-img iniciaSesion"><!--div de slaclk-->
+          <div class="container">
+            <h1>Inicia Sesión</h1>
+            <label for="text"><b>Nombre</b></label>
+            <input id="username01" type="text" placeholder="Introduce nombre" name="nombre" value="anas" required>
+            <label for="psw"><b>Password</b></label>
+            <input id="password01" type="password" placeholder="Introduce Password" name="password" value="anas" required>
+            <button id="iniciar-sesion" type="submit" class="btn">Login</button>
+            <a id="ircrear" href="#">Crear una Cuenta</a>
+          </div>
+        </div>
+     </div>
+
+<div id="crear" style="display:none">
+<h1>Login TwitterClonAna</h1>
+<div id="loginCuenta" class="bg-img card creaUnaCuenta">
+<div class="container nav-item">
+ <h1>CREA UNA CUENTA</h1>
+ <label for="text"><b>Nombre</b></label>
+ <input id="username02" type="text" placeholder="Introduce nombre" pattern=".{4,}" required title="minimo 4 caracteres" maxlength="10" name="nombre" required>
+ <label for="psw"><b>Password</b></label>
+ <input id="userpassword02" type="password" placeholder="Introduce Password" pattern=".{4,}" required title="minimo 4 caracteres" maxlength="20" name="password" required>
+ <button id="crea-sesion" type="submit" class="btn">CREAR</button>
+ <a id="irlogin "href="#">Volver a login</a>
+</div>
+<div class="nav-item">
+<img id="avatar" src="public/anaInvierno.jpg" alt="Avatar">
+</div>
+</div>
+</div>
+
+       <div id="app" class="appprincipal" style="display:none"><!--style="display:none" ... para que no aparezca hasta que queramos-->
+            <h1 style="background-color: lightblue">TU TWITTER-CLON</h1>
+                <div class="wrapper">
+                  <!--imagen del usuario del usuario-->
+                  <figure class="user">
+                      <img id="ana" src="public/anaInvierno.jpg" width="100" height="100">
+                      <figcaption>ana</figcaption>
+                  </figure>
+                  <blockquote class="description arrowLeft">
+                      <!--informacion del usuario-->
+                      <input id="mensajes" type="text" name="" value="">
+                      <button id="enviar" type="button" name="button">enviar</button>
+                  </blockquote>
+                </div>
+
+      <h1>chateando</h1>
+      <ul class="caja">
+
+      </ul>
+</div>
+                        <!--GET ... /tweets ... nos
+                                      nos devuelve {array con los datos}-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script type="text/javascript">
+function iniciarSesion (){
+  $("button#iniciar-sesion").click(function(){
+    var username= $("input#username01").val();
+    var userpassword= $("input#password01").val();
+    $.ajax({
+      url: "http://192.168.100.38:1337/login/",
+      type: "POST",
+      data: {
+        username: username,
+        password: userpassword
+      }
+    })
+    .done(iniciarAplicacion)//si el login es correcto llamo a la función iniciarAplicación
+    .fail(function (){
+      alert("login incorrecto. Crea Una Cuenta");
+    });
+  });
+
+  $('button#crea-sesion').click(function (event){
+    var userName = $('input#username02').val();
+    var userPasword =  $('input#userpassword02').val();
+    var userImagen=  $('input#avatar').val();
+  console.log(userName);
+      if (!userName){
+      return alert("escribe un nombre");
+      }
+      if (!userPasword){
+      return alert("escribe una contraseña");
+      }
+      if (!userImagen){
+        return alert("introduce una imagen");
+      }
+      $.post("http://192.168.100.38:1337/usuario/",{username:userName, password:userPasword, imagen:userImagen}, function(datosdelservidor){
+        console.log(datosdelservidor);
+        alert('usuario creado!')
+        $("div#crear").hide();
+        $("div#login").show();
+      });
+   });
+
+   $("a#ircrear").click(function (){
+     $("div#login").hide();
+     $("div#crear").show();
+   })
+   $("a#irlogin").click(function(){
+     $("div#crear").hide();
+     $("div#login").show();
+   })
+ }//final de INICIA SESIÓN
+  iniciarSesion();
+
+  function iniciarAplicacion(usuario){// cuando todo el login va bien, Joseba tiene puesto que nos manda la id
+        console.log(usuario);// sale en el console la id que me da el servidor {id:11}
+        $("div#login").hide();
+        $("div#crear").hide();
+        $("div#app").show();
+        var USUARIO_ID = usuario.id;
+        console.log(USUARIO_ID); // 11
+        //servidor Joseba   url: "http://192.168.100.38:1337/usuario/"
+        $.get("http://192.168.100.38:1337/tweets/", function (tweets){//hacemos una solicitud al servidor de Joseba
+             console.log(tweets);//nos devuelve un array
+             tweets.forEach(function (tweet){
+//creamos dos variables (clase y texto) en clase metemos la clase="likes" y en texto el texto "LIKE"
+              var clase= "likes";
+              var texto= "LIKE";
+              tweet.likes.forEach(function(usuarioLike){
+                console.log(likes); //son los arrays que nos manda el servidor de las personas que damos likes en
+                if(usuarioLike.id===USUARIO_ID){//si mi id del tweet es igual que me id de usuario
+                   clase= "rojo";//cambia a la clase rojo .. que es la que ponemos cuando ya hemos dado un like y no nos permite más likes
+                   texto= "DISLIKE";//y nos pone el texto DISLIKE
+                }
+              })
+               $("ul.caja").append('<li data-id="'+tweet.id+'" class="wrapper"><figure class="user"><img src="'+tweet.creador.imagen+'" width="100" height="100"><figcaption>'+tweet.creador.username+'<h6 class="sumarvotos"><span>'+ tweet.likes.length +'</span> likes</h6><button id="votar" class="' + clase + '" type="button" name="button">' + texto + '</button></figcaption></figure><blockquote class="description arrowLeft"><p id="mensajeChat">'+tweet.mensaje+'</p></blockquote></li>')
+             });
+          });
+
+          $('button#enviar').click(function (event){
+            var mensajeAna = $('input#mensajes').val();
+            $.ajax({
+              url: "http://192.168.100.38:1337/tweet/",
+              type: "POST",
+              data: {
+                usuario: USUARIO_ID,
+                mensaje:mensajeAna
+              }
+            })
+              .done(function(datos){
+                console.log('DATOS POST TWEET', datos)
+                $("ul.caja").prepend('<li data-id="'+datos.id+'" class="wrapper"><figure class="user"><img src="'+usuario.imagen+'" width="100" height="100"><figcaption>'+usuario.username+'<h6 class="sumarvotos"><span>'+ 0 +'</span> likes</h6><button id="votar" class="likes" type="button" name="button">LIKES</button></figcaption></figure><blockquote class="description arrowLeft"><p id="mensajeChat">'+datos.mensaje+'</p></blockquote></li>')
+              })//datos.id es la id del mensaje. usuario.imagen porque está en la función usuario
+              .fail(function(){
+                alert("ERROR");
+              })
+          });
+      $(document).on("click", ".likes", function votaUsuario(event){//para que funciones el boton de la caja
+      var id= $(event.currentTarget).parent('figcaption').parent('figure.user').parent('li.wrapper').data("id");
+      var boton = $(event.currentTarget);
+
+      console.log(id);
+      $.ajax({
+       url: "http://192.168.100.38:1337/like/" + id,
+       type: 'PUT',
+       data: {
+         usuario: USUARIO_ID//mandamos mi id
+       }
+
+      }).done(function (datos) {
+       console.log(datos);
+       var span = boton.prev('h6.sumarvotos').children('span');//para que detecte el boton de cada caja
+          //me busca el siguiente, en este caso el h2, me busca a su hijo, el span (todo lo he metido en el append)
+       var likes = parseInt(span.text());//para sacar el valor del span span.text()
+        //lo convertimos en numero con parseInt(span.text())
+        likes++
+        console.log(span);
+      //  console.log(likes);
+            span.text(likes);
+            boton.addClass('rojo').removeClass("likes").text('DISLIKE');//ponemos la clase rojo y quitamos la clase likes y ponemos el texto DISLIKE
+
+            //alert("Sólo se puede votar 1 vez");
+        });
+      });
+
+      $(document).on("click", ".rojo", function restarLikes (event){//para que funciones el boton de la caja
+        var id= $(event.currentTarget).parent('figcaption').parent('figure.user').parent('li.wrapper').data("id");
+        var boton = $(event.currentTarget);
+        console.log(id);
+
+      $.ajax({
+       url: "http://192.168.100.38:1337/dislike/" + id, // URL completa a la que hacer la peticion
+       type: 'PUT', // 'POST' o 'GET' o 'DELETE'
+       data: {
+         usuario: USUARIO_ID
+       }
+      }).done(function (datos) { // datos -> será lo que nos devuelva el servidor
+       // Código que queremos que se ejecute cuando el servidor nos haya respondido
+       console.log(datos);
+      var spanrestar = boton.prev('h6.sumarvotos').children('span');//para que detecte el boton de cada caja
+      var restarlikes = parseInt(spanrestar.text());//para sacar el valor del span span.text()
+      restarlikes--
+      //console.log(restarlikes);
+      //console.log(spanrestar);
+      spanrestar.text(restarlikes);
+        boton.removeClass("rojo").addClass("likes").text('LIKE');//quitamos la clase rojo y ponemos la clase likes y el texto LIKE
+      //  alert("Sólo se puede restar 1 vez");
+            });
+      });
+}//fin INICIAR APLICACIÓN
 
 
 
-
-    
     </script>
   </body>
 </html>
